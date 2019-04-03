@@ -5,50 +5,55 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
+                <th>Title</th>
+                <th>Rating</th>
+                <th>Length</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <customer-component
-                    v-for="(customer, index) in customers"
-                    v-bind="customer"
+            <movie-component
+                    v-for="(movie, index) in movies"
+                    v-bind="movie"
                     :index="index"
-                    :key="customer.id"
+                    :key="movie.id"
                     @view="view"
                     @rentals="rentals"
-            ></customer-component>
+            ></movie-component>
             </tbody>
         </table>
     </div>
 </template>
 <script>
 
-  function Customer ({ id, name, email, isAdmin, updated_at }) {
+  function Movie ({ id, title, rating, length, description, onDVD, onBluRay, deleted_at, created_at, updated_at }) {
     this.id = parseInt(id)
-    this.name = name
-    this.email = email
-    this.isAdmin = isAdmin
+    this.title = title
+    this.rating = rating
+    this.length = length
+    this.description = description
+    this.onDVD = onDVD
+    this.onBluRay = onBluRay
+    this.deleted_at = deleted_at
+    this.created_at = created_at
     this.updated_at = updated_at
   }
 
-  /* Go get the code for the customer-component tag that is in the template */
+  /* Go get the code for the movie-component tag that is in the template */
   import MovieComponent from '@/components/MovieComponent.vue'
 
   export default {
     data () {
       return {
-        customers: []
+        movies: []
       }
     },
     methods: {
       read () {
-        this.customers = []
-        window.axios.get('https://usernameistaken.com/api/customers').then(({ data }) => {
-          data.forEach(customer => {
-                this.customers.push(new Customer(customer))
+        this.movies = []
+        window.axios.get('https://usernameistaken.com/api/movies').then(({ data }) => {
+          data.forEach(movie => {
+                this.movies.push(new Movie(movie))
             })
         })
       },

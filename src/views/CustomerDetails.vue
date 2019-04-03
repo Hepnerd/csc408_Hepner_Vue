@@ -31,7 +31,7 @@
     },
     methods: {
       read () {
-        let url = 'http://csc408dev.com/api/customers/' + this.id
+        let url = 'https://usernameistaken.com/api/customers/' + this.id
         window.axios.get(url).then(({ data }) => {
           this.customer = data;
         })

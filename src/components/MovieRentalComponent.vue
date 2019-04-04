@@ -1,11 +1,10 @@
 <template>
     <tr>
-        <td><img :src="this.imageUrl" class="thumbnail"> {{ title }}</td>
-        <td>{{ rating }}</td>
-        <td>{{ length}}</td>
-        <td>{{ transaction.disc_type}}</td>
-        <td>{{ this.rented }}</td>
-        <td>{{ this.returned }}</td>
+    <td>{{ name }}</td>
+    <td>{{ email }}</td>
+    <td>{{ transaction.disc_type}}</td>
+    <td>{{ this.rented }}</td>
+    <td>{{ this.returned }}</td>
     </tr>
 </template>
 
@@ -15,13 +14,23 @@ export default {
       return {}
     },
     methods: {
+      view () {
+        // this.$emit('view', this.id);
+        console.log('Component Viewing id:' + this.id)
 
+        // this.$router.push({ name: 'customer-details', params: { id: 3 } })
+        let myRoute = '/customer-details/3';
+        this.$router.push(myRoute);
+      },
+      rentals () {
+        this.$emit('rentals', this.id);
+      }
     },
     computed: {
         /* Build URL for image */
-        imageUrl: function(){
-          return   "http://codeflare.tech/images/movie_" + this.transaction.movie_id + ".jpg";
-        },
+        /*imageUrl: function(){
+          return   "http://usernameistaken.com/images/movie_" + this.transaction.movie_id + ".jpg";
+        },*/
         /* MAke a pretty date for showing last_update */
         rented: function(){
             var options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -36,7 +45,7 @@ export default {
             return day.toLocaleString("en-US", options);
         }
     },
-    props: ['id', 'title', 'rating', 'length', 'transaction']
+    props: ['id', 'name', 'email', 'transaction']
 }
 </script>
 

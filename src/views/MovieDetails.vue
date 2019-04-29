@@ -3,6 +3,7 @@
         <h3>Movie Details</h3>
         <div class="card" style="width: 50%;">
             <div class="card-body">
+                <img :src="this.imageUrl" class="thumbnail">
                 <h5 class="card-title">{{movie.title}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{movie.rating}}</h6>
                 <p class="card-text">Length: {{ movie.length }}</p>
@@ -32,14 +33,16 @@
     },
     methods: {
       read () {
-        let url = 'https://usernameistaken.com/api/movies/' + this.id
+        let url = 'https://codeflare.tech/api/movies/' + this.id
         window.axios.get(url).then(({ data }) => {
           this.movie = data;
         })
       }
     },
     computed: {
-
+    imageUrl: function () {
+        return "http://codeflare.tech/images/movie_" + this.movie.id + ".jpg";
+    }
     },
     components: {
 

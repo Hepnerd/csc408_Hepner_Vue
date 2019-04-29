@@ -51,7 +51,7 @@
     methods: {
       read () {
         this.movies = []
-        window.axios.get('https://usernameistaken.com/api/movies').then(({ data }) => {
+        window.axios.get('https://codeflare.tech/api/movies').then(({ data }) => {
           data.forEach(movie => {
                 this.movies.push(new Movie(movie))
             })

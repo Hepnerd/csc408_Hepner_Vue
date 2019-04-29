@@ -44,7 +44,7 @@
     methods: {
       read () {
         this.movies = []
-        window.axios.get('https://usernameistaken.com/api/movies/' + this.id + '/rentals')        .then(({ data }) => {
+        window.axios.get('https://codeflare.tech/api/movies/' + this.id + '/rentals')        .then(({ data }) => {
           data[0].rentals.forEach(movie => {
                 this.movies.push(new Movie(movie))
             })
